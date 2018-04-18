@@ -16,6 +16,9 @@
 
                     You are logged in!<br>
                     Now go and do some shopping!
+                    <div class="links">
+                    <a href="http://ao-webshop.local/webshop">To the webshop!</a>
+                </div>
                 </div>
             </div>
         </div>

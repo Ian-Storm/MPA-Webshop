@@ -8,7 +8,7 @@
                 <div class="card-header">Dashboard</div>
 
                 <div class="card-body">
-                    Take a closer look at that SMAAAAAAAMS!
+                    @foreach($categories as $category)<a href="{{url('/webshop/category/' . $category->category_id)}}">{!!$category->name!!}</a><br>@endforeach
                 </div>
             </div>
         </div>
