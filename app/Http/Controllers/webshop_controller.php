@@ -16,10 +16,17 @@ class webshop_controller extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
-    {  
+    public function index($id = null)
+    {
+        $articles =[];    
         $categories = DB::table("categories")->get();
-        return view('webshop', ["categories" => $categories]);
+        if ($id != null) {
+           $article_id = DB::table("articles_and_categories")->select("article_id")->where("category_id", $id)->get();
+        foreach ($article_id as $id) {
+            $articles[] = DB::table("articles")->where("article_id", $id->article_id)->first(); 
+        }
+        }
+        return view('webshop', ["articles" => $articles, "categories" => $categories]);
     }
 
     /**

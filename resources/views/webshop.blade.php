@@ -5,10 +5,11 @@
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
-                <div class="card-header">Dashboard</div>
+                <div class="card-header">Categories</div>
 
                 <div class="card-body">
                     @foreach($categories as $category)<a href="{{url('/webshop/category/' . $category->category_id)}}">{!!$category->name!!}</a><br>@endforeach
+                    @foreach($articles as $article){{$article->name}}<br>@endforeach
                 </div>
             </div>
         </div>
