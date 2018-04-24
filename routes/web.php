@@ -22,3 +22,5 @@ Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/webshop', 'webshop_controller@index');
 
 Route::get('/webshop/category/{categories}', 'webshop_controller@index');
+
+Route::get('/webshop/article/{article}', 'ArticlesController@index');

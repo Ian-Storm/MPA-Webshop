@@ -9,7 +9,8 @@
 
                 <div class="card-body">
                     @foreach($categories as $category)<a href="{{url('/webshop/category/' . $category->category_id)}}">{!!$category->name!!}</a><br>@endforeach
-                    @foreach($articles as $article){{$article->name}}<br>@endforeach
+                    <div class="card-header">Products</div>
+                    @foreach($articles as $article)<a href="{{url('/webshop/article/' . $article->article_id)}}"><button>{{$article->name}}</button></a><button>Add to cart</button><br>@endforeach
                 </div>
             </div>
         </div>
