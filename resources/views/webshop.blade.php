@@ -13,6 +13,7 @@
                     @foreach($articles as $article)<a href="{{url('/webshop/article/' . $article->article_id)}}"><button>{{$article->name}}</button></a><button>Add to cart</button><br>@endforeach
                 </div>
             </div>
+            <a href="{{url('/cart/')}}"><button>To the ShoppingCart</button></a>
         </div>
     </div>
 </div>

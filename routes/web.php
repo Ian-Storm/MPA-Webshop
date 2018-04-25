@@ -24,3 +24,6 @@ Route::get('/webshop', 'webshop_controller@index');
 Route::get('/webshop/category/{categories}', 'webshop_controller@index');
 
 Route::get('/webshop/article/{article}', 'ArticlesController@index');
+
+
+Route::get('/cart', 'ShoppingCartController@index');
