@@ -10,10 +10,10 @@
                 <div class="card-body">
                     {!!$article->description!!}<br>
                     €{!!$article->price!!}
-                    <button>Add to cart</button>
+                    <a href="{{url('/cart/article/' . $article->article_id)}}"><button>Add to cart</button></a>
                 </div>
             </div>
-            <a href="javascript:history.back()">Back</a>
+            <a href="{!!url('/webshop')!!}">Back</a>
         </div>
     </div>
 </div>

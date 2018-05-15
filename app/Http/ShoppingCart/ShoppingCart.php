@@ -1,4 +1,8 @@
 <?php
+namespace App\Http\ShoppingCart;
+
+use App\Http\ShoppingCart\ShoppingItem;
+
 class ShoppingCart
 {
     const SHOPPINGCART = 'Shoppingcart';
@@ -13,7 +17,7 @@ class ShoppingCart
     {
     	if(empty($this->items))
     	{
-    		$item = new Shoppingitem($id,1);
+    		$item = new ShoppingItem($id,1);
 			$this->session->push(self::SHOPPINGCART, $item);
 			$this->items[] = $item;
     	}else
@@ -26,7 +30,7 @@ class ShoppingCart
     		}
             else
             {
-        		$item = new Shoppingitem($id,1);
+        		$item = new ShoppingItem($id,1);
         		$this->session->push(self::SHOPPINGCART,$item);
         		$this->items[] = $item;
             }

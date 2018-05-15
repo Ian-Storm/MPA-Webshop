@@ -25,5 +25,6 @@ Route::get('/webshop/category/{categories}', 'webshop_controller@index');
 
 Route::get('/webshop/article/{article}', 'ArticlesController@index');
 
-
 Route::get('/cart', 'ShoppingCartController@index');
+
+Route::get('/cart/article/{article}', 'ShoppingCartController@call');
