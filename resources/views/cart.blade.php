@@ -7,10 +7,15 @@
             <div class="card">
                 <div class="card-header">Shoppingcart</div>
                 <div class="card-body">
-                   @foreach($articles as $item)<p>{!!$item->name!!}</p><p>{!!$item->description!!}</p><p>Price {!!$item->price!!} euro</p><p>Amount: {!!$all[0]->quantity!!}</p><br>@endforeach
+                   @for($item = 0; $item < count($articles); $item++)
+                   <p>{!!$articles[$item]->name!!}</p><p>{!!$articles[$item]->description!!}</p><p>Price {!!$articles[$item]->price!!} euro</p>
+                   <p>Amount: {!!$all[$item]->quantity!!}</p><br>
+                   @endfor
                 </div>
             </div>
+           <a href="{!!url('/webshop')!!}">Back</a>
         </div>
     </div>
 </div>
 @endsection
+

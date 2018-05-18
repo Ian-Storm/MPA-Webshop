@@ -8,7 +8,7 @@ class ShoppingCart
     const SHOPPINGCART = 'Shoppingcart';
     private $items = [];
     private $session;
-	function __construct($request)
+	public function __construct($request)
 	{
         $this->session = $request->session();
         $this->items = $this->session->has( self::SHOPPINGCART ) ? $this->session->get( self::SHOPPINGCART ) : [];
