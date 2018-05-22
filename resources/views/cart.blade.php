@@ -7,10 +7,16 @@
             <div class="card">
                 <div class="card-header">Shoppingcart</div>
                 <div class="card-body">
-                   @for($item = 0; $item < count($articles); $item++)
-                   <p>{!!$articles[$item]->name!!}</p><p>{!!$articles[$item]->description!!}</p><p>Price {!!$articles[$item]->price!!} euro</p>
-                   <p>Amount: {!!$all[$item]->quantity!!}</p><br>
-                   @endfor
+                 @for($item = 0; $item < count($articles); $item++)
+                	<form action="{{action('ShoppingCartController@updateItem')}}" method="post">
+                	{{csrf_field()}}
+	                   <p>{!!$articles[$item]->name!!}</p><p>{!!$articles[$item]->description!!}</p><p>Price {!!$articles[$item]->price!!} euro</p>
+	                   <input type="hidden" name="id" value="{!!$articles[$item]->article_id!!}">
+	                   <input type="number" min="1" max="8" value="{!!$all[$item]->quantity!!}" name="quantity">
+	                   <input type="submit"><br><br><br>
+                   	</form>
+                   	@endfor
+                   Total {!!$total!!} Euro
                 </div>
             </div>
            <a href="{!!url('/webshop')!!}">Back</a>

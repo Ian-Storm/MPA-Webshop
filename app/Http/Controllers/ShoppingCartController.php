@@ -16,7 +16,8 @@ class ShoppingCartController extends Controller
    foreach ($all as $article) {
    	$articles[] = DB::table("articles")->where('article_id',$article->name)->first();
    }
-   return view('cart', compact("all", "articles"));
+   $total = $this->calc($shoppingcart);
+   return view('cart', compact("all", "articles", "total"));
 }
 	public function call(Request $request, $id){
 		$ShoppingCart = new ShoppingCart($request);
@@ -30,4 +31,23 @@ class ShoppingCartController extends Controller
 		return redirect("/cart");
 	}
 
+	public function calc($ShoppingCart){
+		$total = 0;
+	foreach ($ShoppingCart->getAll() as $article) {
+		$price = DB::table("articles")->where('article_id',$article->name)->first()->price * $article->quantity;
+		$total += $price;
+	} 
+	return $total;
+	}
+
+	public function updateItem(Request $request){
+		$save = $_POST;
+		$shoppingcart = $request->session()->get("Shoppingcart");
+		foreach ($shoppingcart as $item) {
+			if ($item->name == $save["id"]) {
+				$item->quantity = $save["quantity"];
+			}
+		}
+		return back();
+	}
 }

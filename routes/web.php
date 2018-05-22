@@ -28,3 +28,5 @@ Route::get('/webshop/article/{article}', 'ArticlesController@index');
 Route::get('/cart', 'ShoppingCartController@index');
 
 Route::get('/cart/article/{article}', 'ShoppingCartController@call');
+
+Route::post('/cart/article/', 'ShoppingCartController@updateItem');
