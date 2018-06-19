@@ -13,10 +13,10 @@
 	                   <p>{!!$articles[$item]->name!!}</p><p>{!!$articles[$item]->description!!}</p><p>Price {!!$articles[$item]->price!!} euro</p>
 	                   <input type="hidden" name="id" value="{!!$articles[$item]->article_id!!}">
 	                   <input type="number" min="1" max="8" value="{!!$all[$item]->quantity!!}" name="quantity">
-	                   <input type="submit"><br><br><br>
+	                   <input type="submit" value="Change amount"><a href="{{url('/cart/remove/' . $articles[$item]->article_id)}}"> Delete</a><br><br><br>
                    	</form>
                    	@endfor
-                   Total {!!$total!!} Euro
+                   Total {!!$total!!} Euro <a style="float:right" href="">Order Now</a>
                 </div>
             </div>
            <a href="{!!url('/webshop')!!}">Back</a>

@@ -30,3 +30,5 @@ Route::get('/cart', 'ShoppingCartController@index');
 Route::get('/cart/article/{article}', 'ShoppingCartController@call');
 
 Route::post('/cart/article/', 'ShoppingCartController@updateItem');
+
+Route::get('/cart/remove/{id}', 'ShoppingCartController@delete');
