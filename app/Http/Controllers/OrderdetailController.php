@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
-class webshop_controller extends Controller
+class OrderdetailController extends Controller
 {
     public function __construct(){
         $this->middleware("auth");
@@ -22,9 +22,9 @@ class webshop_controller extends Controller
         $categories = DB::table("categories")->get();
         if ($id != null) {
            $article_id = DB::table("articles_and_categories")->select("article_id")->where("category_id", $id)->get();
-        foreach ($article_id as $id) {
-            $articles[] = DB::table("articles")->where("article_id", $id->article_id)->first(); 
-        }
+            foreach ($article_id as $id) {
+                $articles[] = DB::table("articles")->where("article_id", $id->article_id)->first(); 
+            }
         }
         return view('webshop', ["articles" => $articles, "categories" => $categories]);
     }

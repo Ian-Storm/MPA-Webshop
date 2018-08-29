@@ -1,95 +1,19 @@
 <?php
-namespace App\Http\ShoppingCart;
+namespace App\Http\Client;
 
-use App\Http\ShoppingCart\ShoppingItem;
 
-class ShoppingCart
+class Client extends \Illuminate\Database\Eloquent\Model 
 {
-    const SHOPPINGCART = 'Shoppingcart';
-    private $items = [];
-    private $session;
-	public function __construct($request)
-	{
-        $this->session = $request->session();
-        $this->items = $this->session->has( self::SHOPPINGCART ) ? $this->session->get( self::SHOPPINGCART ) : [];
-    }
-    public function add($id)
-    {
-    	if(empty($this->items))
-    	{
-    		$item = new ShoppingItem($id,1);
-			$this->session->push(self::SHOPPINGCART, $item);
-			$this->items[] = $item;
-    	}else
-    	{
-            
-    		if($this->getItem($id))
-    		{
-    			$item = $this->getItem($id);
-    			$item->quantity += 1;
-    		}
-            else
-            {
-        		$item = new ShoppingItem($id,1);
-        		$this->session->push(self::SHOPPINGCART,$item);
-        		$this->items[] = $item;
-            }
-    	}   
-    	
-    }
-    public function getAll()
-    {
-    	if(!$this->isEmpty()){
-    		return $this->items;
-    	}
-    }
-    public function remove($id)
-    {
-		$item = $this->getItem($id);
-    	$cart = $this->session->get(self::SHOPPINGCART);
-        $this->session->forget(self::SHOPPINGCART);
-        for($i=0;$i<sizeof($cart);$i++)
-        {
-            if($cart[$i] == $item)
-            {
-                continue;
-            }
-            $this->session->push(self::SHOPPINGCART,$cart[$i]);
-        }
-        
-    	for($i=0;$i<sizeof($this->items);$i++)
-        {
-            if($this->items[$i] == $item)
-            {
-                unset($this->items[$i]);
-            }
-        }
-    }
-    public function removeAll()
-    {
-    	$this->session->forget(self::SHOPPINGCART);
-    }
-    public function isEmpty()
-    {
-    if(empty($this->items))
-    	{
-    		//empty
-    		return false;
-    	}
-    }
-    /**
-    *	@param $id Id of shopping item
-    *	@return A shopping item
-    */
-    public function getItem($id)
-    {
-    	for($i=0;$i<sizeof($this->items);$i++)
-		{
-			if($this->items[$i]->name == $id)
-			{
-				return $this->items[$i];
-			}
-		}
-        return false;
-    }
+    public $fillable = ['user_id', 'name', 'street', 'housenumber', 'state', 'country', 'phone'];
+    function saveC($read){
+        $client = $this->create(['user_id'=>auth()->user()->id, 
+            'name'=>$read['name'],
+            'street'=>$read['street'],
+            'housenumber'=>$read['housenumber'],
+            'state'=>$read['state'],
+            'country'=>$read['country'], 
+            'phone'=>$read['phone']
+            ]);
+        return $client;
+    }    
 }

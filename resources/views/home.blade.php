@@ -21,6 +21,14 @@
                 </div>
                 </div>
             </div>
+            <h2>Orders</h2>
+            @if (is_array($order))
+                @foreach ($order as $ordered)
+                    {!!$ordered!!}
+                @endforeach
+            @else 
+                {!!$order!!}
+            @endif
         </div>
     </div>
 </div>

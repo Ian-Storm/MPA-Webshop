@@ -7,6 +7,7 @@
             <div class="card">
                 <div class="card-header">Shoppingcart</div>
                 <div class="card-body">
+                @if (!empty($articles))
                  @for($item = 0; $item < count($articles); $item++)
                 	<form action="{{action('ShoppingCartController@updateItem')}}" method="post">
                 	{{csrf_field()}}
@@ -16,7 +17,13 @@
 	                   <input type="submit" value="Change amount"><a href="{{url('/cart/remove/' . $articles[$item]->article_id)}}"> Delete</a><br><br><br>
                    	</form>
                    	@endfor
-                   Total {!!$total!!} Euro <a style="float:right" href="">Order Now</a>
+                   Total {!!$total!!} Euro
+                   <a style="float:right" href="{{url('/order/clientdata/')}}">Order Now</a>
+                 @else
+                 <div class="row justify-content-center">
+                  <p>Your cart is empty</p>
+                  </div>
+                  @endif
                 </div>
             </div>
            <a href="{!!url('/webshop')!!}">Back</a>

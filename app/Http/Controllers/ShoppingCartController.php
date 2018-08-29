@@ -51,3 +51,4 @@ class ShoppingCartController extends Controller
 		return back();
 	}
 }
+
