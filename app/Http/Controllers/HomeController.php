@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Http\Order\Order;
+use App\Http\Client\Client;
+
 
 class HomeController extends Controller
 {
@@ -24,8 +26,8 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $client = auth()->user()->id;
-        $order = Order::get();
-        return view('home', ['order' => $order, 'client' => $client]);
+        $id = Client::where('user_id', auth()->user()->id )->first()->client_id;
+
+        return view('home', ['order' => Order::where('client_id', $id)->get()]);
     }
 }

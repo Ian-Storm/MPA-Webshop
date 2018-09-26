@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use App\Http\Order\Order;
+use App\Http\Order\Orderdetail;
+
 use App\Http\Client\Client;
 
 class OrderController extends Controller
@@ -39,14 +41,20 @@ class OrderController extends Controller
         $client = Client::where('user_id', auth()->user()->id)->first();
         $order->client_id = $client->client_id;
         $order->save();
+
         $shoppingcart = $request->session()->get("Shoppingcart");
+
+        $orderdetails = new Orderdetail();
         // list every item from the shoppingcart seperatly to save in order details
         foreach ($shoppingcart as $item) {
-            $order->orderdetails()->create([
+            $orderdetails->create([
+                "order_id" => $order->id,
                 "article_id" => $item->name,
                 "count" => $item->quantity
             ]);
         }
+
+
         $request->session()->forget('Shoppingcart');
         
     }
