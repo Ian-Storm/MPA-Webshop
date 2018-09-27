@@ -8,9 +8,9 @@ use Illuminate\Support\Facades\DB;
 
 class ArticlesController extends Controller
 {
+
     /**
-     * Display a listing of the resource.
-     *
+     * Display a listing of the articles
      * @return \Illuminate\Http\Response
      */
     public function index($id)

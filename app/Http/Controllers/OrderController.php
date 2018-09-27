@@ -13,37 +13,36 @@ use App\Http\Client\Client;
 class OrderController extends Controller
 {
     private $shoppingData;
-     /**
-     * Display a listing of the resource.
-     *
+
+    /**
+     * requesting the shoppingcart
      * @return \Illuminate\Http\Response
      */
-    public function index()
-    {
-        
-    }
-
     public function clientdata(Request $request)
     {
         $shoppingData = $request->session()->get('Shoppingcart');
         return view('client');
     }
 
-     public function orderConfirmed($request)
+    /**
+     * confirm the order to send a thanks message
+     * @return \Illuminate\Http\Response
+     */
+    public function orderConfirmed($request)
     {
         $this->save($request);
-
         return view('tnx');
     }
 
+    /**
+     * saves the whole order
+     */
     public function save($request){
         $order = new Order();
         $client = Client::where('user_id', auth()->user()->id)->first();
         $order->client_id = $client->client_id;
         $order->save();
-
         $shoppingcart = $request->session()->get("Shoppingcart");
-
         $orderdetails = new Orderdetail();
         // list every item from the shoppingcart seperatly to save in order details
         foreach ($shoppingcart as $item) {
@@ -53,9 +52,6 @@ class OrderController extends Controller
                 "count" => $item->quantity
             ]);
         }
-
-
-        $request->session()->forget('Shoppingcart');
-        
+            $request->session()->forget('Shoppingcart');     
     }
 }

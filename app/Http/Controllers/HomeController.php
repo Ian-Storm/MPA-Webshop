@@ -9,9 +9,9 @@ use App\Http\Client\Client;
 
 class HomeController extends Controller
 {
+
     /**
-     * Create a new controller instance.
-     *
+     * Create a new controller instance
      * @return void
      */
     public function __construct()
@@ -20,14 +20,12 @@ class HomeController extends Controller
     }
 
     /**
-     * Show the application dashboard.
-     *
+     * Show the application dashboard
      * @return \Illuminate\Http\Response
      */
     public function index()
     {
         $id = Client::where('user_id', auth()->user()->id )->first()->client_id;
-
         return view('home', ['order' => Order::where('client_id', $id)->get()]);
     }
 }

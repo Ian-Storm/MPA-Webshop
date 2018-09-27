@@ -12,15 +12,9 @@ class ClientController extends Controller
 {
 
     /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
+     * Saving your order
+     * @return $ordercontroller
      */
-    public function index()
-    {
-       
-    }
-
     public function save(Request $request)
     {
         $read = $_POST;
